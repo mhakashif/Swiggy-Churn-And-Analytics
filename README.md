@@ -1,4 +1,4 @@
-# Swiggy-Churn-And-Analytics
+# Swiggy-Churn
 Overview
 This project focuses on predicting customer churn using historical data on city, area, customer ratings, and delivery times. We define two types of churn:
 
