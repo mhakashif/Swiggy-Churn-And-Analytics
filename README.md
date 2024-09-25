@@ -66,18 +66,16 @@ The code allows users to enter a city and area for which the model will predict 
 Example Output
 If you input a city and area that exists in the dataset:
 
-bash
 Copy code
-Enter the city: New York
-Enter the area: Downtown
-In New York (Downtown), Churn1 prediction: 1, Churn2 prediction: 0
+Enter the city: 
+Enter the area:
+In city, Churn1 prediction: 1, Churn2 prediction: 0
 Results Explanation:
 Churn1 prediction: Indicates if customers in this area are likely to churn due to low ratings (1 for churn, 0 for no churn).
 Churn2 prediction: Indicates if customers in this area are likely to churn due to slow delivery (1 for churn, 0 for no churn).
 Code Structure
 Here is a summary of the key files:
-
-main.py: The main Python script that contains the churn prediction logic.
+The main Python script that contains the churn prediction logic.
 README.md: This explanation document.
 Model Accuracy
 The model uses accuracy scores to evaluate its performance:
