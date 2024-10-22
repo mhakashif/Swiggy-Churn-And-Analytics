@@ -1,95 +1,68 @@
-# Swiggy-Churn
-Overview
-This project focuses on predicting customer churn using historical data on city, area, customer ratings, and delivery times. We define two types of churn:
+# Swiggy Delivery Time Prediction and Churn Analysis
 
-Churn1: Determined by whether a customer gives a low total rating (certain threshold).
-Churn2: Determined by whether a customer experiences slow delivery (set time threshold).
-The goal is to provide a machine learning model that predicts the likelihood of customer churn based on these factors. The model allows users to input a city and area and receive predictions about potential churn in that location.
+This project is a comprehensive analysis of Swiggy delivery data, aimed at identifying factors that contribute to slower delivery times and predicting customer churn using machine learning techniques. By leveraging Python libraries such as `pandas`, `scikit-learn`, and `matplotlib`, the analysis not only provides insights into customer behaviors but also predicts churn rates based on delivery performance.
 
-Problem Statement
-Many businesses struggle to retain customers, especially when they receive poor service. In this project, we use a dataset with columns like:
+## Project Overview
 
-City: Where the service was provided.
-Area: The specific area within the city.
-Total Ratings: The customer’s overall rating of the service.
-Delivery Time: The time it took for the service or product to be delivered.
-Based on these inputs, we aim to predict two types of churn:
+- **Dataset**: The dataset contains information about Swiggy deliveries, including delivery time, area, city, restaurant details, food types, ratings, and more.
+- **Objective**: The primary goal is to build a churn prediction model to determine whether a restaurant will experience a churn (due to slow delivery) based on features such as city and area.
 
-Churn1: If the customer is likely to churn based on low ratings.
-Churn2: If the customer is likely to churn due to long delivery times.
+## Key Features
 
-Project Steps
-1. Data Preparation
-We create two target columns:
+1. **Data Preprocessing**:
+    - Load and clean the Swiggy dataset.
+    - Encode categorical variables such as city and area using `LabelEncoder`.
+    - Define a new target variable (`churn2`), which is based on delivery times greater than 30 minutes.
 
-Churn1: Customers with total ratings below a threshold (e.g., less than 3) are considered likely to churn.
-Churn2: Customers who experienced delivery times above a threshold (e.g., more than 30 minutes) are considered likely to churn.
-We also encode categorical variables like City and Area using Label Encoding to convert them into numerical formats suitable for machine learning models.
+2. **Churn Prediction Model**:
+    - Used a `RandomForestClassifier` to build a churn prediction model based on the encoded city and area variables.
+    - Split the dataset into training and testing sets using `train_test_split`.
+    - Achieved an accuracy of **96.54%** in predicting slow delivery churn.
 
-2. Model Training
-We train two separate Random Forest Classifiers for predicting churn:
+3. **City and Area Selector**:
+    - Dynamically list available cities and areas, allowing users to select their city and area of interest.
+    - Predicts churn for the selected city and area.
 
-Model for Churn1: Predicts if a customer is likely to churn based on low ratings.
-Model for Churn2: Predicts if a customer is likely to churn based on slow delivery times.
-The dataset is split into training and testing sets (80% training, 20% testing) to ensure the model is not overfitted and generalizes well on unseen data.
+4. **User Interaction**:
+    - Asks for user input (city and area) and provides churn prediction based on the selected location.
 
-3. Model Evaluation
-After training, we evaluate the performance of both models using accuracy scores. The accuracy score tells us how well the models predict churn on the test dataset.
+## Tools & Technologies
 
-4. User Input Prediction
-The model allows users to input a city and area to predict the likelihood of churn in that location. We handle cases where the city or area is not present in the training data by providing a default value and warning.
+- **Programming Language**: Python
+- **Libraries**:
+  - `pandas`: For data manipulation and preprocessing.
+  - `numpy`: For numerical operations.
+  - `matplotlib` and `seaborn`: For data visualization.
+  - `scikit-learn`: For building machine learning models (Random Forest) and encoding categorical data.
 
-Installation and Usage
-Prerequisites
-Before running the code, make sure you have the following libraries installed:
+## Installation & Usage
 
-pandas
-sklearn (scikit-learn)
-You can install the required packages using the following command:
+1. Clone the repository and navigate to the project directory.
+   ```bash
+   git clone <repo-link>
+   cd swiggy-churn-analysis
 
-bash
-Copy code
-pip install pandas scikit-learn
-Running the Code
-Prepare the Dataset: Load the dataset into the df DataFrame. The dataset should contain the following columns:
+2. Ensure the dataset `swiggy.csv` is present in the same directory.
 
-City
-Area
-Total Ratings
-Delivery Time
-Run the Model:
+3. Run the Python script to perform churn prediction and interact with the city and area selector.
+   ```bash
+   python swiggy_churn.py
+   ```
 
-The model will automatically process the data, train itself, and output the accuracy of both churn predictions.
-Predict Churn for a New City/Area:
+4. Enter the city and area details as prompted, and the system will predict whether a customer churn is likely due to slow delivery.
 
-The code allows users to enter a city and area for which the model will predict Churn1 and Churn2.
-Example Output
-If you input a city and area that exists in the dataset:
+## Example Output
+```
+Enter the city: Hyderabad
+Enter the area: L.B Nagar
+In Hyderabad (L.B Nagar), Slow delivery Churn prediction: 1
+```
 
-Copy code
-Enter the city: 
-Enter the area:
-In city, Churn1 prediction: 1, Churn2 prediction: 0
-Results Explanation:
-Churn1 prediction: Indicates if customers in this area are likely to churn due to low ratings (1 for churn, 0 for no churn).
-Churn2 prediction: Indicates if customers in this area are likely to churn due to slow delivery (1 for churn, 0 for no churn).
-Code Structure
-Here is a summary of the key files:
-The main Python script that contains the churn prediction logic.
-README.md: This explanation document.
-Model Accuracy
-The model uses accuracy scores to evaluate its performance:
+## Accuracy
 
-Accuracy for Churn1: The percentage of correct predictions for churn based on ratings.
-Accuracy for Churn2: The percentage of correct predictions for churn based on delivery times.
-These accuracy scores provide a measure of the model’s performance on unseen test data, ensuring the model is reliable for future predictions.
+- The `RandomForestClassifier` achieved an accuracy of **96.54%**, making it a robust model for predicting churn based on delivery time and location.
 
-Future Improvements
-To further improve the model’s performance and extend its usage:
+## Conclusion
 
-Feature Engineering: Add more features (e.g., order size, customer type) that could influence churn.
-Model Optimization: Perform hyperparameter tuning on the Random Forest models to achieve better accuracy.
-Handle New Data: Implement better handling of unseen cities or areas that are not present in the training data.
-Model Persistence: Save the trained models using joblib or pickle so that they can be reused without retraining.
-Conclusion
-This project successfully provides a framework for predicting customer churn based on ratings and delivery time. It enables businesses to target areas with high churn risk, allowing them to take corrective actions to improve customer retention.
+This project provides insights into delivery performance and customer churn using real-world data from Swiggy. The interactive city and area selection feature, combined with machine learning predictions, makes it an engaging tool for exploring the delivery dynamics of food services in various cities.
+
